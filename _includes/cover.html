@@ -3,55 +3,397 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Presentación Web</title>
-  <link rel="stylesheet" href="css/styles.css">
+  <title>Presentación — Estilo Editorial</title>
+  <!-- Fuentes similares a la página de referencia -->
+  <link rel="preconnect" href="https://googleapis.com">
+  <link rel="preconnect" href="https://gstatic.com" crossorigin>
+  <link href="https://googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&family=Newsreader:opsz,wght@6..72,600;6..72,700&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg-page: #f5f5f4;
+      --bg-slide: #ffffff;
+      --bg-subtle: #fafaf9;
+      --text-main: #18181b;
+      --text-muted: #52525b;
+      --accent: #b91c1c; /* Acento editorial sobrio */
+      --accent-soft: #fef2f2;
+      --border: #e4e4e7;
+    }
+
+    [data-theme="dark"] {
+      --bg-page: #09090b;
+      --bg-slide: #121215;
+      --bg-subtle: #18181b;
+      --text-main: #f4f4f5;
+      --text-muted: #a1a1aa;
+      --accent: #f87171;
+      --accent-soft: rgba(248, 113, 113, 0.12);
+      --border: #27272a;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-page);
+      color: var(--text-main);
+      font-family: 'Inter', system-ui, sans-serif;
+      transition: background-color 0.2s ease, color 0.2s ease;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Barra superior minimalista */
+    .topbar {
+      position: sticky;
+      top: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.75rem 2rem;
+      background: var(--bg-slide);
+      border-bottom: 1px solid var(--border);
+      z-index: 100;
+    }
+
+    .topbar-info {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .topbar-title {
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+
+    .topbar-meta {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .controls {
+      display: flex;
+      gap: 0.6rem;
+      align-items: center;
+    }
+
+    button {
+      padding: 0.4rem 0.85rem;
+      border: 1px solid var(--border);
+      background: var(--bg-subtle);
+      color: var(--text-main);
+      border-radius: 6px;
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 500;
+      transition: all 0.15s ease;
+    }
+
+    button:hover {
+      border-color: var(--text-muted);
+    }
+
+    button.primary {
+      background: var(--text-main);
+      color: var(--bg-slide);
+      border-color: var(--text-main);
+    }
+
+    button.primary:hover {
+      opacity: 0.9;
+    }
+
+    /* Contenedor de diapositivas estilo documento/deck */
+    #deck {
+      max-width: 1024px;
+      margin: 2.5rem auto;
+      display: flex;
+      flex-direction: column;
+      gap: 2.5rem;
+      padding: 0 1.5rem;
+    }
+
+    .slide {
+      background: var(--bg-slide);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 3.5rem 4.5rem;
+      aspect-ratio: 16 / 9;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+    }
+
+    /* Cabecera interna de cada diapositiva */
+    .slide-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 0.75rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .kicker {
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--accent);
+    }
+
+    .slide-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .slide-body {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .slide h1 {
+      font-family: 'Newsreader', Georgia, serif;
+      font-size: 3rem;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+    }
+
+    .slide h2 {
+      font-family: 'Newsreader', Georgia, serif;
+      font-size: 2.25rem;
+      line-height: 1.2;
+      letter-spacing: -0.01em;
+      margin-bottom: 1.25rem;
+    }
+
+    .slide p {
+      font-size: 1.1rem;
+      line-height: 1.6;
+      color: var(--text-muted);
+      max-width: 68ch;
+      margin-bottom: 1rem;
+    }
+
+    .slide ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+      font-size: 1.05rem;
+    }
+
+    .slide li {
+      padding-left: 1.25rem;
+      position: relative;
+      line-height: 1.5;
+    }
+
+    .slide li::before {
+      content: "—";
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    /* Grilla de datos y botón revelar (?) */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.25rem;
+      margin-top: 0.5rem;
+    }
+
+    .stat-box {
+      background: var(--bg-subtle);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.25rem;
+    }
+
+    .stat-label {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      margin-bottom: 0.5rem;
+    }
+
+    .reveal-trigger {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--accent-soft);
+      color: var(--accent);
+      border: 1px solid var(--accent);
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 700;
+      padding: 0.25rem 0.65rem;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .reveal-value {
+      display: none;
+      font-family: 'Newsreader', Georgia, serif;
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .stat-box.open .reveal-trigger {
+      display: none;
+    }
+
+    .stat-box.open .reveal-value {
+      display: block;
+    }
+
+    /* Pie de diapositiva */
+    .slide-footer {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border);
+      padding-top: 0.6rem;
+      margin-top: 1rem;
+    }
+
+    /* MODO PRESENTACIÓN */
+    .present-controls {
+      display: none;
+    }
+
+    body.presenting {
+      overflow: hidden;
+      background: var(--bg-slide);
+    }
+
+    body.presenting .topbar {
+      display: none;
+    }
+
+    body.presenting #deck {
+      max-width: 100%;
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+    }
+
+    body.presenting .slide {
+      display: none;
+      aspect-ratio: auto;
+      height: 100vh;
+      border: none;
+      border-radius: 0;
+      padding: 3.5rem 8%;
+    }
+
+    body.presenting .slide.active {
+      display: flex;
+    }
+
+    body.presenting .present-controls {
+      position: fixed;
+      bottom: 1.25rem;
+      right: 2rem;
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+      background: var(--bg-subtle);
+      padding: 0.4rem 0.75rem;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      z-index: 200;
+    }
+
+    @media (max-width: 768px) {
+      .slide {
+        aspect-ratio: auto;
+        padding: 2rem 1.5rem;
+      }
+      .grid-2 {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
 <body>
 
-  <!-- Barra de navegación superior -->
   <header class="topbar">
-    <div class="brand">Mi Presentación</div>
+    <div class="topbar-info">
+      <span class="topbar-title">Título del Curso o Taller</span>
+      <span class="topbar-meta" id="top-count">01 / 03</span>
+    </div>
     <div class="controls">
-      <span id="slide-counter">01 / 03</span>
-      <button id="btn-theme" title="Cambiar tema">Tema oscuro</button>
+      <button id="btn-theme">Tema oscuro</button>
       <button id="btn-present" class="primary">▶ Presentar</button>
     </div>
   </header>
 
-  <!-- Contenedor de diapositivas -->
   <main id="deck">
-    
+
+    <!-- LÁMINA 1 -->
     <section class="slide active">
-      <span class="badge">Apertura</span>
-      <h1>Título de la Presentación</h1>
-      <p>Subtítulo o descripción breve de la primera lámina.</p>
+      <div class="slide-header">
+        <span class="kicker">Sesión 1 · Apertura</span>
+        <span class="slide-num">01 / 03</span>
+      </div>
+      <div class="slide-body">
+        <h1>Diseño y Mejora de Programas</h1>
+        <p>Subtítulo de la presentación · Fecha y nombre del docente o expositor.</p>
+      </div>
+      <div class="slide-footer">
+        Usa las flechas ← → para navegar en modo presentación · Esc para salir
+      </div>
     </section>
 
+    <!-- LÁMINA 2 -->
     <section class="slide">
-      <span class="badge">Módulo 1 · Conceptos</span>
-      <h2>Segunda Diapositiva</h2>
-      <ul>
-        <li>Primer punto clave con información relevante.</li>
-        <li>Segundo punto clave para desarrollar el tema.</li>
-      </ul>
+      <div class="slide-header">
+        <span class="kicker">Apertura · Reglas</span>
+        <span class="slide-num">02 / 03</span>
+      </div>
+      <div class="slide-body">
+        <h2>Objetivos del trabajo</h2>
+        <ul>
+          <li><strong>Diagnosticar el problema público</strong> detrás de su programa con evidencia cuantitativa.</li>
+          <li><strong>Construir la cadena de resultados</strong> y detectar su eslabón más frágil.</li>
+          <li><strong>Formular una propuesta de mejora</strong> concreta y sustentada en datos.</li>
+        </ul>
+      </div>
+      <div class="slide-footer">
+        Fuente: Guía metodológica del taller.
+      </div>
     </section>
 
+    <!-- LÁMINA 3 -->
     <section class="slide">
-      <span class="badge">Cierre</span>
-      <h2>Tercera Diapositiva</h2>
-      <p>Conclusiones finales y cierre de la sesión.</p>
-    </section>
-
-  </main>
-
-  <!-- Controles flotantes (solo visibles en modo presentación) -->
-  <div class="presentation-nav">
-    <button id="btn-prev">← Anterior</button>
-    <span id="present-counter">01 / 03</span>
-    <button id="btn-next">Siguiente →</button>
-    <button id="btn-exit">✕ Salir (Esc)</button>
-  </div>
-
-  <script src="script.js"></script>
-</body>
-</html>
+      <div class="slide-header">
+        <span class="kicker">Problema de fondo</span>
+        <span class="slide-num">03 / 03</span>
+      </div>
+      <div class="slide-body">
+        <h2>¿Qué tan grandes son estas brechas?</h2>
+        <div class="grid-2">
+          <div class="stat-box">
+            <div class="stat-label">Pobreza · zona rural</div>
+            <button class="reveal-trigger" onclick="this.parentElement.classList.add('open')">?</button>
+            <div class="reveal-value">35,5% <span style="font-size:1rem; font-family:Inter; font-weight:400;">de la población rural</span></div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-label">Anemia infantil rural</div>
+            <button class="reveal-trigger" onclick="this.parentElement.classList.add('open')">?</button>
+            <div class="reveal-value">43,2% <span style="font-size:1rem; font-family:Inter; font-weight:400;">niñas y niños de 6 a 35 meses</span></div>
+          </div>
+        </div>
+      </div>
