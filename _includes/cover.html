@@ -1,74 +1,57 @@
-<section id="cover">
-    <section>
-        <h1>Plan de Gobierno del Poder Judicial 2027-2028</h1>
-        
-        <hr />
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Presentación Web</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
 
-        <p>Descripción breve máximo 140 caracteres</p>
-        <small>Información adicional</small>
+  <!-- Barra de navegación superior -->
+  <header class="topbar">
+    <div class="brand">Mi Presentación</div>
+    <div class="controls">
+      <span id="slide-counter">01 / 03</span>
+      <button id="btn-theme" title="Cambiar tema">Tema oscuro</button>
+      <button id="btn-present" class="primary">▶ Presentar</button>
+    </div>
+  </header>
 
-        <br>
-        
-        <img src="images/logo-programoergosum.png" />
+  <!-- Contenedor de diapositivas -->
+  <main id="deck">
+    
+    <section class="slide active">
+      <span class="badge">Apertura</span>
+      <h1>Título de la Presentación</h1>
+      <p>Subtítulo o descripción breve de la primera lámina.</p>
     </section>
-    <!--
-        Bloques de diapositivas
-    -->
-    <section data-markdown>
-        ### Imágenes
 
-        Recuerda guardar la imagen en la carpeta `images/`.
-
-        ![](images/logo-programoergosum.png)
+    <section class="slide">
+      <span class="badge">Módulo 1 · Conceptos</span>
+      <h2>Segunda Diapositiva</h2>
+      <ul>
+        <li>Primer punto clave con información relevante.</li>
+        <li>Segundo punto clave para desarrollar el tema.</li>
+      </ul>
     </section>
-    <section data-markdown>
-        # Encabezado h1
 
-        ## Encabezado h2
-
-        ### Encabezado h3
+    <section class="slide">
+      <span class="badge">Cierre</span>
+      <h2>Tercera Diapositiva</h2>
+      <p>Conclusiones finales y cierre de la sesión.</p>
     </section>
-    <section data-markdown>
-        ### Tipografía
 
-        Lorem ipsum dolor sit **negrita**, *cursiva* adipiscing.
+  </main>
 
-        Haz clic [aquí](https://www.programoergosum.es) para ir a la web de @ProgramoErgoSum.     
-    </section>
-    <section data-markdown>
-        ### Lista de elementos
+  <!-- Controles flotantes (solo visibles en modo presentación) -->
+  <div class="presentation-nav">
+    <button id="btn-prev">← Anterior</button>
+    <span id="present-counter">01 / 03</span>
+    <button id="btn-next">Siguiente →</button>
+    <button id="btn-exit">✕ Salir (Esc)</button>
+  </div>
 
-        - Elemento 1
-            - 1 1
-            - 1 2
-        - Elemento 2
-            - 2 1
-            - 2 2
-            - 2 3
-        - Elemento 3
-            - 3 1
-    </section>
-    <section data-markdown>
-        ### Lista numerada
-
-        1. Elemento 1
-            - 1 1
-            - 1 2
-        2. Elemento 2
-            - 2 1
-            - 2 2
-            - 2 3
-        3. Elemento 3
-            - 3 1
-    </section>
-    <section data-markdown>
-        ### Tabla
-
-        | L | M | X | J | V | S | D |
-        | :--: | :--: | :--: | :--: |
-        | 16 | 17 | 18 | **19** | 20 | 21 | 22 |
-        | 23 | **24** | 25 | **26** | 27 | 28 | 29 |
-        | 30 | **1** | 2 | **3** | 4 | 5 | 6 |
-        | 7 | **8** | 9 | **10** | 11 | 12 | 13 |
-    </section>
-</section>
+  <script src="script.js"></script>
+</body>
+</html>
